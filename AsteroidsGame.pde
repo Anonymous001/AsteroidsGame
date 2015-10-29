@@ -1,4 +1,5 @@
 //your variable declarations here
+SpaceShip tri;
 public void setup() 
 {
   size(400,400);
@@ -8,6 +9,10 @@ public void draw()
   //your code here
   SpaceShip tri = new SpaceShip();
   tri.show();
+}
+public void keyTyped(){
+  if(key == 'a'){tri.accelerate(2);}
+  
 }
 class SpaceShip extends Floater  
 { 
@@ -21,6 +26,8 @@ class SpaceShip extends Floater
   yCorners[1] = 8;
   xCorners[2] = 16;
   yCorners[2] = 0;
+  myCenterX = 200;
+  myCenterY = 200;
  }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
