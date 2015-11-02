@@ -3,16 +3,21 @@ SpaceShip tri;
 public void setup() 
 {
   size(400,400);
+  tri = new SpaceShip();
 }
 public void draw() 
 {
   //your code here
-  SpaceShip tri = new SpaceShip();
+  background(100,100,100);
   tri.show();
+  tri.move();
 }
-public void keyTyped(){
-  if(key == 'a'){tri.accelerate(2);}
-  
+public void keyPressed(){
+  if(key == 'w'){tri.accelerate(0.5);}
+  //5.5
+  if(key == 's'){tri.accelerate(-0.5);}
+  if(key == 'a'){tri.rotate(5);}
+  if(key == 'd'){tri.rotate(-5);}
 }
 class SpaceShip extends Floater  
 { 
