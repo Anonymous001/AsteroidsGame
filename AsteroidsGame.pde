@@ -2,7 +2,7 @@
 SpaceShip tri;
 public void setup() 
 {
-  size(400,400);
+  size(800,800);
   tri = new SpaceShip();
 }
 public void draw() 
@@ -14,10 +14,23 @@ public void draw()
 }
 public void keyPressed(){
   if(key == 'w'){tri.accelerate(0.5);}
-  //5.5
   if(key == 's'){tri.accelerate(-0.5);}
   if(key == 'a'){tri.rotate(5);}
   if(key == 'd'){tri.rotate(-5);}
+  if(key == 'h'){tri.setX((int)(Math.random()*800)); tri.setY((int)(Math.random()*800));}
+}
+class Stars
+{
+  private int myX,myY;
+  public Star()
+  {
+     myX = (int)(Math.random()*800;)
+     myY = (int)(Math.random()*800;)
+  }
+  public void show()
+  {
+    fill();
+  }
 }
 class SpaceShip extends Floater  
 { 
@@ -31,8 +44,8 @@ class SpaceShip extends Floater
   yCorners[1] = 8;
   xCorners[2] = 16;
   yCorners[2] = 0;
-  myCenterX = 200;
-  myCenterY = 200;
+  myCenterX = 400;
+  myCenterY = 400;
  }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
@@ -70,7 +83,11 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   {          
     //convert the current direction the floater is pointing to radians    
     double dRadians =myPointDirection*(Math.PI/180);     
-    //change coordinates of direction of travel    
+    //change coordinates of direction of travel   
+    if(myDirectionX>=5.5){myDirectionX = 5.5;} 
+    if(myDirectionY>=5.5){myDirectionY = 5.5;}
+    if(myDirectionX<=-5.5){myDirectionX = -5.5;} 
+    if(myDirectionY<=-5.5){myDirectionY = -5.5;}  
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
