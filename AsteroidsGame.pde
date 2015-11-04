@@ -1,9 +1,14 @@
 //your variable declarations here
+Stars [] yellow = new Stars[200];
 SpaceShip tri;
 public void setup() 
 {
   size(800,800);
   tri = new SpaceShip();
+  for(int i = 0; i < yellow.length(); i++)
+  {
+    yellow[i]= new Stars();
+  }
 }
 public void draw() 
 {
@@ -11,6 +16,10 @@ public void draw()
   background(100,100,100);
   tri.show();
   tri.move();
+  for(int i = 0; i < yellow.length(); i++)
+  {
+    yellow[i].show();
+  }
 }
 public void keyPressed(){
   if(key == 'w'){tri.accelerate(0.5);}
@@ -22,14 +31,15 @@ public void keyPressed(){
 class Stars
 {
   private int myX,myY;
-  public Star()
+  public Stars()
   {
-     myX = (int)(Math.random()*800;)
-     myY = (int)(Math.random()*800;)
+     myX = (int)(Math.random()*800);
+     myY = (int)(Math.random()*800);
   }
   public void show()
   {
-    fill();
+    fill(255,211,25);
+    ellipse(myX,myY,20,20);
   }
 }
 class SpaceShip extends Floater  
