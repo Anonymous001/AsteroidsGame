@@ -5,7 +5,7 @@ public void setup()
 {
   size(800,800);
   tri = new SpaceShip();
-  for(int i = 0; i < yellow.length(); i++)
+  for(int i = 0; i < yellow.length; i++)
   {
     yellow[i]= new Stars();
   }
@@ -16,7 +16,7 @@ public void draw()
   background(100,100,100);
   tri.show();
   tri.move();
-  for(int i = 0; i < yellow.length(); i++)
+  for(int i = 0; i < yellow.length; i++)
   {
     yellow[i].show();
   }
@@ -38,10 +38,12 @@ class Stars
   }
   public void show()
   {
-    fill(255,211,25);
-    ellipse(myX,myY,20,20);
+    fill(150,150,150);
+    noStroke();
+    ellipse(myX,myY,5,5);
   }
 }
+
 class SpaceShip extends Floater  
 { 
  public SpaceShip(){
@@ -67,6 +69,23 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
+}
+class Fire extends Spaceship
+{
+  public Fire()
+  {
+    corners = 5;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -8;
+    yCorners[0] = -8;
+    xCorners[1] = -8 + (Math.random()*-4);
+    yCorners[1] = -4;
+    xCorners[2] = 0;
+    yCorners[2] = -8 + (Math.random()*-2);
+    myCenterX = 400;
+    myCenterY = 400;
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -132,8 +151,9 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor);   
-    stroke(myColor);    
+    noFill();   
+    strokeWeight(2);
+    stroke(255);    
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
