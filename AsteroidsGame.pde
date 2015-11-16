@@ -1,6 +1,7 @@
 //your variable declarations here
 Stars [] yellow = new Stars[200];
 SpaceShip tri;
+Fire boom;
 public void setup() 
 {
   size(800,800);
@@ -9,23 +10,26 @@ public void setup()
   {
     yellow[i]= new Stars();
   }
+  boom = new Fire();
 }
 public void draw() 
 {
   //your code here
   background(100,100,100);
+  stroke(255);
   tri.show();
   tri.move();
+  boom.move();
   for(int i = 0; i < yellow.length; i++)
   {
     yellow[i].show();
   }
 }
 public void keyPressed(){
-  if(key == 'w'){tri.accelerate(0.5);}
-  if(key == 's'){tri.accelerate(-0.5);}
-  if(key == 'a'){tri.rotate(5);}
-  if(key == 'd'){tri.rotate(-5);}
+  if(key == 'w'){tri.accelerate(0.01);boom.accelerate(0.01); stroke(255,0,0);boom.show();}
+  if(key == 's'){tri.accelerate(-0.01);boom.accelerate(-0.01);}
+  if(key == 'a'){tri.rotate(10);boom.rotate(10);}
+  if(key == 'd'){tri.rotate(-10);boom.rotate(-10);}
   if(key == 'h'){tri.setX((int)(Math.random()*800)); tri.setY((int)(Math.random()*800));}
 }
 class Stars
@@ -70,7 +74,7 @@ class SpaceShip extends Floater
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
 }
-class Fire extends Spaceship
+class Fire extends SpaceShip
 {
   public Fire()
   {
@@ -79,10 +83,14 @@ class Fire extends Spaceship
     yCorners = new int[corners];
     xCorners[0] = -8;
     yCorners[0] = -8;
-    xCorners[1] = -8 + (Math.random()*-4);
+    xCorners[1] = -8 + (int)(Math.random()*-8);
     yCorners[1] = -4;
-    xCorners[2] = 0;
-    yCorners[2] = -8 + (Math.random()*-2);
+    xCorners[2] = -8 + (int)(Math.random()*-8);
+    yCorners[2] = 0;
+    xCorners[3] = -8 + (int)(Math.random()*-8);
+    yCorners[3] = 4;
+    xCorners[4] = -8;
+    yCorners[4] = 8;
     myCenterX = 400;
     myCenterY = 400;
   }
@@ -152,9 +160,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void show ()  //Draws the floater at the current position  
   {             
     noFill();   
-    strokeWeight(2);
-    stroke(255);    
-    //convert degrees to radians for sin and cos         
+    strokeWeight(2);    
+    //convert degrees to radians for sin and cos       
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
