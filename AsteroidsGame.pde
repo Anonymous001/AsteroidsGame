@@ -30,7 +30,9 @@ public void keyPressed(){
   if(key == 's'){tri.accelerate(-0.01);boom.accelerate(-0.01);}
   if(key == 'a'){tri.rotate(10);boom.rotate(10);}
   if(key == 'd'){tri.rotate(-10);boom.rotate(-10);}
-  if(key == 'h'){tri.setX((int)(Math.random()*800)); tri.setY((int)(Math.random()*800));}
+  int RandX = (int)(Math.random()*800);
+  int RandY = (int)(Math.random()*800);
+  if(key == 'h'){tri.setX(RandX); tri.setY(RandY);boom.setX(RandX);boom.setY(RandY);tri.rotate(RandX);boom.rotate(RandX);}
 }
 class Stars
 {
