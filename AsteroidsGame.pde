@@ -32,7 +32,7 @@ public void keyPressed(){
   if(key == 'd'){tri.rotate(-10);boom.rotate(-10);}
   int RandX = (int)(Math.random()*800);
   int RandY = (int)(Math.random()*800);
-  if(key == 'h'){tri.setX(RandX); tri.setY(RandY);boom.setX(RandX);boom.setY(RandY);tri.rotate(RandX);boom.rotate(RandX);}
+  if(key == 'h'){tri.setX(RandX); tri.setY(RandY);boom.setX(RandX);boom.setY(RandY);tri.rotate(RandX);boom.rotate(RandX);tri.setDirectionX(0); boom.setDirectionX(0);tri.setDirectionY(0); boom.setDirectionY(0);}
 }
 class Stars
 {
