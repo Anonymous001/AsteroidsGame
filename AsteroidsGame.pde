@@ -2,6 +2,7 @@
 Stars [] yellow = new Stars[200];
 SpaceShip tri;
 Fire boom;
+Asteroid muhaha;
 public void setup() 
 {
   size(800,800);
@@ -11,6 +12,7 @@ public void setup()
     yellow[i]= new Stars();
   }
   boom = new Fire();
+  muhaha = new Asteroid();
 }
 public void draw() 
 {
@@ -20,6 +22,7 @@ public void draw()
   tri.show();
   tri.move();
   boom.move();
+  muhaha.move();
   for(int i = 0; i < yellow.length; i++)
   {
     yellow[i].show();
