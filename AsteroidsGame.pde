@@ -23,9 +23,14 @@ public void draw()
   tri.move();
   boom.move();
   muhaha.move();
+  muhaha.show();
   for(int i = 0; i < yellow.length; i++)
   {
     yellow[i].show();
+  }
+  for(int i = 0; i < hydra.size(); i++)
+  {
+    hydra.add
   }
 }
 public void keyPressed(){
@@ -112,8 +117,14 @@ class Asteroid extends Floater
   yCorners[1] = 8;
   xCorners[2] = 16;
   yCorners[2] = 0;
+  xCorners[3] = 20;
+  yCorners[3] = 20;
+  xCorners[4] = -20;
+  yCorners[4] = 10;
   myCenterX = 400;
   myCenterY = 400;
+  myDirectionX = (int)((Math.random()*10)-5);
+  myDirectionY = (int)((Math.random()*10)-5);
  }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
