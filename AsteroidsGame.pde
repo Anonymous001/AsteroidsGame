@@ -3,6 +3,7 @@ Stars [] yellow = new Stars[200];
 SpaceShip tri;
 Fire boom;
 Asteroid muhaha;
+ArrayList<Asteroid> a = new ArrayList<Asteroid>();
 public void setup() 
 {
   size(800,800);
@@ -28,10 +29,7 @@ public void draw()
   {
     yellow[i].show();
   }
-  for(int i = 0; i < hydra.size(); i++)
-  {
-    hydra.add
-  }
+  a.add(new Asteroid());
 }
 public void keyPressed(){
   if(key == 'w'){tri.accelerate(0.01);boom.accelerate(0.01); stroke(255,0,0);boom.show();}
