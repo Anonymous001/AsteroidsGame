@@ -2,8 +2,7 @@
 Stars [] yellow = new Stars[200];
 SpaceShip tri;
 Fire boom;
-Asteroid muhaha;
-ArrayList<Asteroid> a = new ArrayList<Asteroid>();
+ArrayList<Asteroid> a;
 public void setup() 
 {
   size(800,800);
@@ -13,7 +12,10 @@ public void setup()
     yellow[i]= new Stars();
   }
   boom = new Fire();
-  muhaha = new Asteroid();
+  a = new ArrayList <Asteroid>();
+  for(int i = 0; i <50; i++){
+    a.add(new Asteroid());
+  }
 }
 public void draw() 
 {
@@ -23,13 +25,15 @@ public void draw()
   tri.show();
   tri.move();
   boom.move();
-  muhaha.move();
-  muhaha.show();
   for(int i = 0; i < yellow.length; i++)
   {
     yellow[i].show();
+  } 
+  for(int i = 0; i < a.size(); i++){
+    a.get(i).show();
+    a.get(i).move();
+    
   }
-  a.add(new Asteroid());
 }
 public void keyPressed(){
   if(key == 'w'){tri.accelerate(0.01);boom.accelerate(0.01); stroke(255,0,0);boom.show();}
