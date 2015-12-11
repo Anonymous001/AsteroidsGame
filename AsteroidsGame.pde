@@ -13,7 +13,7 @@ public void setup()
   }
   boom = new Fire();
   a = new ArrayList <Asteroid>();
-  for(int i = 0; i <50; i++){
+  for(int i = 0; i <20; i++){
     a.add(new Asteroid());
   }
 }
@@ -32,7 +32,6 @@ public void draw()
   for(int i = 0; i < a.size(); i++){
     a.get(i).show();
     a.get(i).move();
-    
   }
 }
 public void keyPressed(){
@@ -128,6 +127,7 @@ class Asteroid extends Floater
   myDirectionX = (int)((Math.random()*10)-5);
   myDirectionY = (int)((Math.random()*10)-5);
  }
+  
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
   public void setY(int y){myCenterY = y;}   
@@ -138,6 +138,7 @@ class Asteroid extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -203,7 +204,8 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    noFill();   
+    noFill(); 
+    stroke(255);  
     strokeWeight(2);    
     //convert degrees to radians for sin and cos       
     double dRadians = myPointDirection*(Math.PI/180);                 
