@@ -13,7 +13,7 @@ public void setup()
   }
   boom = new Fire();
   a = new ArrayList <Asteroid>();
-  for(int i = 0; i <20; i++){
+  for(int i = 0; i < 10; i++){
     a.add(new Asteroid());
   }
 }
@@ -35,8 +35,8 @@ public void draw()
   }
 }
 public void keyPressed(){
-  if(key == 'w'){tri.accelerate(0.01);boom.accelerate(0.01); stroke(255,0,0);boom.show();}
-  if(key == 's'){tri.accelerate(-0.01);boom.accelerate(-0.01);}
+  if(key == 'w'){tri.accelerate(0.1);boom.accelerate(0.1); stroke(255,0,0);boom.show();}
+  if(key == 's'){tri.accelerate(-0.1);boom.accelerate(-0.1);}
   if(key == 'a'){tri.rotate(10);boom.rotate(10);}
   if(key == 'd'){tri.rotate(-10);boom.rotate(-10);}
   int RandX = (int)(Math.random()*800);
@@ -122,10 +122,11 @@ class Asteroid extends Floater
   yCorners[3] = 20;
   xCorners[4] = -20;
   yCorners[4] = 10;
-  myCenterX = 400;
-  myCenterY = 400;
+  myCenterX = (int)(Math.random()*800);
+  myCenterY = (int)(Math.random()*800);
   myDirectionX = (int)((Math.random()*10)-5);
   myDirectionY = (int)((Math.random()*10)-5);
+  myPointDirection = (double)((Math.random()*360));
  }
   
   public void setX(int x){myCenterX = x;}
@@ -140,6 +141,14 @@ class Asteroid extends Floater
   public double getPointDirection(){return myPointDirection;}
 
 }
+class Bullet extends Floater
+{
+  public Bullet(Spaceship theShip)
+  {
+    myCenterX = Spaceship.getX();
+    myCenterY = Spaceship.getY();
+  }
+]
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
