@@ -141,14 +141,7 @@ class Asteroid extends Floater
   public double getPointDirection(){return myPointDirection;}
 
 }
-class Bullet extends Floater
-{
-  public Bullet(Spaceship theShip)
-  {
-    myCenterX = Spaceship.getX();
-    myCenterY = Spaceship.getY();
-  }
-]
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
