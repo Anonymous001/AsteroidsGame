@@ -82,6 +82,7 @@ class Stars
 
 class SpaceShip extends Floater  
 { 
+ private double dRadians;
  public SpaceShip(){
   corners = 3;
   xCorners = new int[corners];
@@ -94,6 +95,8 @@ class SpaceShip extends Floater
   yCorners[2] = 0;
   myCenterX = 400;
   myCenterY = 400;
+  dRadians = atan2( mouseY - height/2, mouseX - width/2 );
+  myPointDirection = atan2( mouseY - height/2, mouseX - width/2 );
  }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
@@ -105,6 +108,22 @@ class SpaceShip extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
+  public void show(){
+    noFill(); 
+    stroke(255);  
+    strokeWeight(2);
+    double dRadians = atan2( mouseY - tri.getY(), mouseX - tri.getX() );                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);  
+  }
 }
 class Fire extends SpaceShip
 {
@@ -160,7 +179,6 @@ class Asteroid extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
-
 }
 class bullet extends Floater
 {
@@ -170,7 +188,7 @@ class bullet extends Floater
       myCenterX = tri.getX();
       myCenterY = tri.getY();
       myPointDirection = tri.getPointDirection();
-      dRadians = myPointDirection*(Math.PI/180);
+      dRadians = atan2( mouseY - tri.getY(), mouseX - tri.getX() );
       myDirectionX = 5*Math.cos(dRadians) + tri.getDirectionX();
       myDirectionY = 5*Math.sin(dRadians) + tri.getDirectionY();
   }
@@ -187,7 +205,7 @@ class bullet extends Floater
   public void show() {
     fill(255,0,0);
     noStroke();
-    ellipse((float)myCenterX,(float)myCenterY,5,5);
+    ellipse((float)myCenterX,(float)myCenterY,7,7);
   }
   public void move ()   {      
     myCenterX += myDirectionX;    
@@ -218,7 +236,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians =atan2( mouseY - tri.getY(), mouseX - tri.getX() );     
     //change coordinates of direction of travel   
     if(myDirectionX>=5.5){myDirectionX = 5.5;} 
     if(myDirectionY>=5.5){myDirectionY = 5.5;}
