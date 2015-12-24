@@ -3,6 +3,7 @@ Stars [] yellow = new Stars[200];
 SpaceShip tri;
 Fire boom;
 ArrayList<Asteroid> a;
+ArrayList<bullet> clips; 
 public void setup() 
 {
   size(800,800);
@@ -16,6 +17,7 @@ public void setup()
   for(int i = 0; i < 10; i++){
     a.add(new Asteroid());
   }
+  clips = new ArrayList <bullet>();
 }
 public void draw() 
 {
@@ -33,15 +35,34 @@ public void draw()
     a.get(i).show();
     a.get(i).move();
   }
+  for(int b = 0; b< clips.size(); b++){
+      clips.get(b).show();
+      clips.get(b).move();
+  }
+  for(int i = 0; i < a.size(); i++){
+    for(int b = 0; b< clips.size(); b++){
+      double distance = dist(clips.get(b).getX(), clips.get(b).getY(), a.get(i).getX(), a.get(i).getY());
+      if(distance < 15){
+        clips.remove(a);
+        a.remove(i);
+        a.add(new Asteroid());
+      }
+    }
+  }
 }
 public void keyPressed(){
-  if(key == 'w'){tri.accelerate(0.1);boom.accelerate(0.1); stroke(255,0,0);boom.show();}
-  if(key == 's'){tri.accelerate(-0.1);boom.accelerate(-0.1);}
+  if(key == 'w'){tri.accelerate(0.4);boom.accelerate(0.4); stroke(255,0,0);boom.show();}
+  if(key == 's'){tri.accelerate(-0.4);boom.accelerate(-0.4);}
   if(key == 'a'){tri.rotate(10);boom.rotate(10);}
   if(key == 'd'){tri.rotate(-10);boom.rotate(-10);}
   int RandX = (int)(Math.random()*800);
   int RandY = (int)(Math.random()*800);
   if(key == 'h'){tri.setX(RandX); tri.setY(RandY);boom.setX(RandX);boom.setY(RandY);tri.rotate(RandX);boom.rotate(RandX);tri.setDirectionX(0); boom.setDirectionX(0);tri.setDirectionY(0); boom.setDirectionY(0);}
+}
+public void mouseClicked(){
+  for(int i = 0; i<1; i++){
+    clips.add(new bullet(tri));
+  }
 }
 class Stars
 {
@@ -141,7 +162,38 @@ class Asteroid extends Floater
   public double getPointDirection(){return myPointDirection;}
 
 }
-
+class bullet extends Floater
+{
+  private double dRadians;
+  public bullet(SpaceShip tri) 
+  {
+      myCenterX = tri.getX();
+      myCenterY = tri.getY();
+      myPointDirection = tri.getPointDirection();
+      dRadians = myPointDirection*(Math.PI/180);
+      myDirectionX = 5*Math.cos(dRadians) + tri.getDirectionX();
+      myDirectionY = 5*Math.sin(dRadians) + tri.getDirectionY();
+  }
+  public void setX(int x) {myCenterX = x;}
+  public int getX() {return (int)myCenterX;}   
+  public void setY(int y) {myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}    
+  public void setDirectionX(double x){myDirectionX = x;}      
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;} 
+  public double getDirectionY(){return myDirectionY;}  
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return myPointDirection;}
+  public void show() {
+    fill(255,0,0);
+    noStroke();
+    ellipse((float)myCenterX,(float)myCenterY,5,5);
+  }
+  public void move ()   {      
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+  }
+}
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
